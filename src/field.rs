@@ -58,7 +58,7 @@ mod tests {
 
     #[test]
     fn assert_caddq() {
-        for x in -(Q - 1)..Q {
+        for x in (-Q)..Q {
             let res = caddq(x);
             assert!((0..Q).contains(&res), "{x} = {res}");
             assert_eq!(x.rem_euclid(Q), res.rem_euclid(Q));
