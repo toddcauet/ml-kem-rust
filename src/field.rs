@@ -18,6 +18,10 @@ pub(crate) fn caddq(x: i16) -> i16 {
     x + mask
 }
 
+pub(crate) fn csubq(x: i16) -> i16 {
+    caddq(x - Q)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -48,6 +52,15 @@ mod tests {
     fn assert_caddq() {
         for x in -(Q - 1)..Q {
             let res = caddq(x);
+            assert!((0..Q).contains(&res), "{x} = {res}");
+            assert_eq!(x.rem_euclid(Q), res.rem_euclid(Q));
+        }
+    }
+
+    #[test]
+    fn assert_csubq() {
+        for x in 0..2*Q {
+            let res = csubq(x);
             assert!((0..Q).contains(&res), "{x} = {res}");
             assert_eq!(x.rem_euclid(Q), res.rem_euclid(Q));
         }
