@@ -59,7 +59,7 @@ mod tests {
 
     #[test]
     fn assert_csubq() {
-        for x in 0..2*Q {
+        for x in 0..2 * Q {
             let res = csubq(x);
             assert!((0..Q).contains(&res), "{x} = {res}");
             assert_eq!(x.rem_euclid(Q), res.rem_euclid(Q));
