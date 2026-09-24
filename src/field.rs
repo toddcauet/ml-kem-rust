@@ -13,6 +13,11 @@ pub(crate) fn montgomery_reduction(x: i32) -> i16 {
     ((x - m as i32 * Q as i32) >> 16) as i16
 }
 
+pub(crate) fn caddq(x: i16) -> i16 {
+    let mask: i16 = (x >> 15) & Q;
+    x + mask
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -36,6 +41,15 @@ mod tests {
                 (res as i64 * 65536).rem_euclid(Q as i64),
                 (x as i64).rem_euclid(Q as i64)
             );
+        }
+    }
+
+    #[test]
+    fn assert_caddq() {
+        for x in -(Q - 1)..Q {
+            let res = caddq(x);
+            assert!((0..Q).contains(&res), "{x} = {res}");
+            assert_eq!(x.rem_euclid(Q), res.rem_euclid(Q));
         }
     }
 }
