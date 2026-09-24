@@ -13,6 +13,13 @@ pub(crate) fn montgomery_reduction(x: i32) -> i16 {
     ((x - m as i32 * Q as i32) >> 16) as i16
 }
 
+/// Maps a representative in `[-q, q-1]` to its canonical form in `[0, q-1]`.
+///
+/// Adds `q` if `x` is negative, using a mask built from the sign bit (no branch).
+///
+/// Input: `x` in `[-q, q-1]`.
+/// Output: in `[0, q-1]`, congruent to `x` mod `q`.
+/// Outside this input range, the result is not reduced.
 pub(crate) fn caddq(x: i16) -> i16 {
     let mask: i16 = (x >> 15) & Q;
     x + mask
