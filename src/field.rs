@@ -79,7 +79,7 @@ mod tests {
         for x in 0..Q {
             for y in 0..Q {
                 let res = add(x, y);
-                assert_eq!(res, (x+y).rem_euclid(Q));
+                assert_eq!(res, (x + y).rem_euclid(Q));
             }
         }
     }
@@ -89,7 +89,7 @@ mod tests {
         for x in 0..Q {
             for y in 0..Q {
                 let res = sub(x, y);
-                assert_eq!(res, (x-y).rem_euclid(Q));
+                assert_eq!(res, (x - y).rem_euclid(Q));
             }
         }
     }
